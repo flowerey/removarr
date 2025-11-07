@@ -1,134 +1,93 @@
-Auto Remove Torrents
-======================
-|PyPI| |GithubActionsCI| |ReadTheDocs| |Coverage| |Codacy| |Downloads| |MIT|
+# Removarr
 
-This program can help you to remove your torrents. Now you don't need to worry about your disk space - according to your strategies, the program will check each torrent if it satisfies the remove condition; If so, delete it automatically.
+Removarr automatically manages and removes completed torrents based on your own custom rules.
+It helps you keep your disk space clean without the need to manually monitor torrent activity.
 
-This program supports qBittorrent/Transmission/μTorrent. If you like, star it :star2: :)
+Removarr works with **qBittorrent**, **Transmission**, and **μTorrent**, and can be customized to match your exact cleanup preferences.
 
-Documentation: https://autoremove-torrents.readthedocs.io/en/latest/
+## Features
 
-Readme version in other languages: `简体中文`_.
+* Automatically delete torrents based on conditions like seeding time, ratio, or category
+* Works with major torrent clients
+* Fully configurable through a simple YAML file
+* Supports dry-run mode to preview removals
+* Easy to automate with system schedulers (e.g., cron)
 
-.. _简体中文: https://github.com/jerrymakesjelly/autoremove-torrents/blob/master/README-cn.rst
+## Requirements
 
-.. |GithubActionsCI| image:: https://github.com/jerrymakesjelly/autoremove-torrents/actions/workflows/build.yml/badge.svg?branch=master
-   :target: https://github.com/jerrymakesjelly/autoremove-torrents/actions
-.. |ReadTheDocs| image:: https://readthedocs.org/projects/autoremove-torrents/badge/?version=latest
-   :target: https://autoremove-torrents.readthedocs.io/en/latest/?badge=latest
-.. |Codacy| image:: https://app.codacy.com/project/badge/Grade/ab6f14fa9d9845b8bc8edecaf8f705e4
-   :target: https://www.codacy.com/gh/jerrymakesjelly/autoremove-torrents/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jerrymakesjelly/autoremove-torrents&amp;utm_campaign=Badge_Grade
-.. |Coverage| image:: https://app.codacy.com/project/badge/Coverage/ab6f14fa9d9845b8bc8edecaf8f705e4
-    :target: https://www.codacy.com/gh/jerrymakesjelly/autoremove-torrents/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jerrymakesjelly/autoremove-torrents&amp;utm_campaign=Badge_Coverage
-.. |MIT| image:: https://img.shields.io/badge/license-MIT-blue.svg
-   :target: https://github.com/jerrymakesjelly/autoremove-torrents/blob/master/LICENSE
-.. |PyPI| image:: https://badge.fury.io/py/autoremove-torrents.svg
-    :target: https://badge.fury.io/py/autoremove-torrents
-.. |Downloads| image:: https://img.shields.io/pypi/dm/autoremove-torrents.svg
-    :target: https://pypi.org/project/autoremove-torrents/
+* Python 3.6 or newer
+* Installed and running torrent client (qBittorrent, Transmission, or μTorrent)
 
-Requirements
--------------
-* Python 2.7 or Python 3
+## Installation
 
-We recommend you to use Python 3.6 or higher version of Python.
+Clone this repository and install locally:
 
+```bash
+git clone https://github.com/jerrymakesjelly/autoremove-torrents.git
+cd autoremove-torrents
+python3 setup.py install
+```
 
-Quick Start
--------------
-Installation
-+++++++++++++++++++
-Install from pip
-^^^^^^^^^^^^^^^^^
-::
+## Configuration
 
-    pip install autoremove-torrents
+Removarr uses a configuration file to define your cleanup strategies.
+You can place the configuration file anywhere; by default, it looks for `config.yml` in the current directory.
 
-or
+Example configuration:
 
-Install from GitHub
-^^^^^^^^^^^^^^^^^^^^
-::
+```yaml
+my_task:
+  client: qbittorrent
+  host: http://127.0.0.1
+  username: admin
+  password: adminadmin
+  strategies:
+    clean_old:
+      categories: IPT
+      remove: seeding_time > 1209600 or ratio > 1
+  delete_data: true
+```
 
-    git clone https://github.com/jerrymakesjelly/autoremove-torrents.git
-    cd autoremove-torrents
-    python3 setup.py install
+In this example, Removarr will delete torrents in the **IPT** category that have been seeding for more than 14 days or have a ratio greater than 1.
 
+## Usage
 
-Write your configuration file
-++++++++++++++++++++++++++++++
-In order to satisfactory your needs, you have to learn how to write a configuration file. 
+To run Removarr:
 
-You can put the configuration file anywhere on your disk. The autoremove-torrents looks for ``config.yml`` in the Shell's current working directory::
+```bash
+removarr
+```
 
-    vim ./config.yml
+To preview which torrents would be removed without actually deleting them:
 
+```bash
+removarr --view
+```
 
-The grammar is quite easy, for example::
+## Scheduling (Optional)
 
-    my_task:
-      client: qbittorrent
-      host: http://127.0.0.1
-      username: admin
-      password: adminadmin
-      strategies:
-        my_strategy:
-          categories: IPT
-          remove: seeding_time > 1209600 or ratio > 1
-      delete_data: true
+You can automate Removarr to run periodically using `cron`.
+For example, to check every 15 minutes:
 
-The program will delete those torrents whose categories are ``IPT``, seeding time is above 1209600 seconds **or** ratio is greater than 1. Read the `documents`_ to learn more.
+```bash
+crontab -e
+```
 
-.. _documents: https://autoremove-torrents.readthedocs.io/en/latest
+Then add a line like this (adjust paths as needed):
 
-Run
-++++
-::
+```bash
+*/15 * * * * /usr/bin/removarr --conf=/path/to/config.yml --log=/path/to/logs
+```
 
-    autoremove-torrents
+* `--conf` specifies the configuration file path
+* `--log` defines where logs will be stored (directory must exist)
 
-If you just want to see which torrents can be removed but don't want to really remove them, use ``--view`` command line argument.
+## Contributing
 
+Feedback, feature requests, and bug reports are always welcome.
+Please open an issue or pull request on GitHub to contribute.
 
-Setting up scheduled tasks
------------------------------
-If you want to check whether there is any torrent can be removed every 15 minutes, the crontab can help you. Look at the example::
+## License
 
-    crontab -e
-
-And then, add a line at the end of the file (please confirm the path of the autoremove-torrents and your program)::
-
-*/15 * * * * /usr/bin/autoremove-torrents --conf=/home/jerrymakesjelly/autoremove-torrents/config.yml --log=/home/jerrymakesjelly/autoremove-torrents/logs
-
-The ``--conf`` indicates the path to the configuration file.
-The ``--log`` argument specifies the path to store the log files (Must be existed).
-
-Screenshot
------------
-|Screenshot|
-
-.. |Screenshot| image:: https://user-images.githubusercontent.com/6760674/174464634-15743d59-f1dc-41c9-bff6-6d90becaeb67.gif
-
-Changelog
---------------
-
-**Sat, 27 Apr 2024**: Version 1.5.5.
-
-* Fix the compatibility issues in qBittorrent 4.5 and later. (#157) (#173) (#174) (#182) (#186) Thanks to @Siriussee!
-    - See the API changes in qbittorrent/qBittorrent#17563.
-
-We also fix the unittest workflow for the lastest qBittorrent. Thanks to @amefs!
-
-`More changelogs`_
-
-.. _More changelogs: https://autoremove-torrents.readthedocs.io/en/latest/changelog.html
-
-TODO List
------------
-Depend on users' feedback. If you have any problem, please submit `issues`_.
-
-.. _issues: https://github.com/jerrymakesjelly/autoremove-torrents/issues
-
-`Click here`_ to see the TODO List.
-
-.. _Click here: https://github.com/jerrymakesjelly/autoremove-torrents/issues/63
+This project is released under the MIT License.
+You are free to use, modify, and distribute it under the same terms.
