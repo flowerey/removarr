@@ -1,5 +1,4 @@
-pytest-cov
-codacy-coverage
-requests_mock
-pytest-mock
-setuptools
+pytest-cov>=2.6.0
+requests-mock>=1.8.0
+pytest-mock>=1.10.0
+setuptools>=40.0.0

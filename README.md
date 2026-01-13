@@ -1,6 +1,6 @@
 # Removarr
 
-A fork of removarr that is more up-to-date and has more features.
+A fork of autotorrent-remove that is more up-to-date and has more features.
 
 Removarr automatically manages and removes completed torrents based on your own custom rules.
 It helps you keep your disk space clean without the need to manually monitor torrent activity.
@@ -25,9 +25,9 @@ Removarr works with **qBittorrent**, **Transmission**, and **μTorrent**, and ca
 Clone this repository and install locally:
 
 ```bash
-git clone https://github.com/jerrymakesjelly/removarr.git
+git clone https://github.com/flower/removarr.git
 cd removarr
-python3 setup.py install
+python setup.py install
 ```
 
 ## Configuration
