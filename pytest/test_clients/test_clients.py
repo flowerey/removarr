@@ -1,14 +1,14 @@
 import sys
 import os
 import yaml
-from autoremovetorrents import logger
-from autoremovetorrents.task import Task
-from autoremovetorrents.exception.connectionfailure import ConnectionFailure
-from autoremovetorrents.exception.loginfailure import LoginFailure
-from autoremovetorrents.exception.nosuchclient import NoSuchClient
-from autoremovetorrents.exception.nosuchtorrent import NoSuchTorrent
-from autoremovetorrents.exception.remotefailure import RemoteFailure
-from autoremovetorrents.compatibility.open_ import open_
+from removarr import logger
+from removarr.task import Task
+from removarr.exception.connectionfailure import ConnectionFailure
+from removarr.exception.loginfailure import LoginFailure
+from removarr.exception.nosuchclient import NoSuchClient
+from removarr.exception.nosuchtorrent import NoSuchTorrent
+from removarr.exception.remotefailure import RemoteFailure
+from removarr.compatibility.open_ import open_
 
 def test_client(env_dist):
     # Init logger

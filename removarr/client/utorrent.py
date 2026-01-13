@@ -4,10 +4,10 @@ import time
 import requests
 from ..torrent import Torrent
 from ..clientstatus import ClientStatus
-from autoremovetorrents.exception.connectionfailure import ConnectionFailure
-from autoremovetorrents.exception.loginfailure import LoginFailure
-from autoremovetorrents.exception.nosuchtorrent import NoSuchTorrent
-from autoremovetorrents.exception.remotefailure import RemoteFailure
+from removarr.exception.connectionfailure import ConnectionFailure
+from removarr.exception.loginfailure import LoginFailure
+from removarr.exception.nosuchtorrent import NoSuchTorrent
+from removarr.exception.remotefailure import RemoteFailure
 from ..torrentstatus import TorrentStatus
 
 class uTorrent(object):

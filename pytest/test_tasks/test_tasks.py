@@ -1,8 +1,8 @@
 import yaml
 import os
-from autoremovetorrents import logger
-from autoremovetorrents.task import Task
-from autoremovetorrents.compatibility.open_ import open_
+from removarr import logger
+from removarr.task import Task
+from removarr.compatibility.open_ import open_
 
 def test_task(qbittorrent_mocker):
     # Init loggger

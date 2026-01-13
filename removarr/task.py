@@ -9,7 +9,7 @@ from .client.utorrent import uTorrent
 from .client.deluge import Deluge
 from .exception.nosuchclient import NoSuchClient
 from .strategy import Strategy
-from autoremovetorrents.torrent import Torrent
+from removarr.torrent import Torrent
 
 class Task(object):
     def __init__(self, name, conf, remove_torrents = True):
@@ -114,7 +114,7 @@ class Task(object):
 
     # Remove torrents
     def _remove_torrents(self):
-        # Bulid a dict to store torrent hashes and names which to be deleted
+        # Build a dict to store torrent hashes and names which to be deleted
         delete_list = {}
         for torrent in self._remove:
             delete_list[torrent.hash] = torrent.name

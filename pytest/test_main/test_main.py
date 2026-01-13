@@ -1,7 +1,7 @@
 import os
 import requests_mock
-from autoremovetorrents import logger
-from autoremovetorrents.main import pre_processor
+from removarr import logger
+from removarr.main import pre_processor
 
 def test_main(requests_mock):
     # Init logger

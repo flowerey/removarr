@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 
 from .base import Condition
-from autoremovetorrents.compatibility.inf_ import inf_
+from removarr.compatibility.inf_ import inf_
 
 class ConditionWithSort(Condition):
     def __init__(self, action):

@@ -6,8 +6,8 @@ import traceback
 import yaml
 from . import logger
 from .task import Task
-from autoremovetorrents.version import __version__
-from autoremovetorrents.compatibility.open_ import open_
+from removarr.version import __version__
+from removarr.compatibility.open_ import open_
 
 def pre_processor(argv):
     # View Mode
@@ -69,7 +69,7 @@ def pre_processor(argv):
     except Exception:
         lg.error(traceback.format_exc().splitlines()[-1])
         lg.debug('Exception Logged', exc_info=True)
-        lg.critical('An error occured. If you think this is a bug or need help, you can submit an issue.')
+        lg.critical('An error occurred. If you think this is a bug or need help, you can submit an issue.')
 
 def main():
     pre_processor(sys.argv[1:])

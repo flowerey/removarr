@@ -133,7 +133,7 @@ class qBittorrent(object):
                 self._request_handler = handler
                 break
         if self._request_handler is None:
-            raise IncompatibleAPIVersion('Incompatible qbittorrent client. The current API version may be unsupported.')
+            raise IncompatibleAPIVersion('Incompatible qBittorrent client. The current API version may be unsupported.')
 
     # Login to qBittorrent
     def login(self, username, password):

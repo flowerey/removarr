@@ -2,13 +2,13 @@ import sys
 import os
 import yaml
 from collections import namedtuple
-from autoremovetorrents import logger
-from autoremovetorrents.strategy import Strategy
-from autoremovetorrents.exception.illegalcharacter import IllegalCharacter
-from autoremovetorrents.exception.syntaxerror import ConditionSyntaxError
-from autoremovetorrents.exception.nosuchcondition import NoSuchCondition
-from autoremovetorrents.compatibility.open_ import open_
-from autoremovetorrents.compatibility.disk_usage_ import SUPPORT_SHUTIL
+from removarr import logger
+from removarr.strategy import Strategy
+from removarr.exception.illegalcharacter import IllegalCharacter
+from removarr.exception.syntaxerror import ConditionSyntaxError
+from removarr.exception.nosuchcondition import NoSuchCondition
+from removarr.compatibility.open_ import open_
+from removarr.compatibility.disk_usage_ import SUPPORT_SHUTIL
 
 def test_strategies(mocker, test_data, test_env, test_status):
     # Init logger

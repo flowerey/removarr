@@ -5,10 +5,10 @@ sys.path.append(os.path.realpath(os.path.dirname(__file__))+"/../..")
 
 import pytest
 import json
-from autoremovetorrents.clientstatus import ClientStatus
-from autoremovetorrents.torrent import Torrent
-from autoremovetorrents.torrentstatus import TorrentStatus
-from autoremovetorrents.compatibility.open_ import open_
+from removarr.clientstatus import ClientStatus
+from removarr.torrent import Torrent
+from removarr.torrentstatus import TorrentStatus
+from removarr.compatibility.open_ import open_
 
 @pytest.fixture(scope="module")
 def test_data():

@@ -6,7 +6,7 @@ import sys
 
 sys.path.append(os.path.realpath(os.path.dirname(__file__))+"/../..")
 
-from autoremovetorrents.compatibility.open_ import open_
+from removarr.compatibility.open_ import open_
 
 @pytest.fixture(scope="function")
 def qbittorrent_mocker(requests_mock):

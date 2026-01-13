@@ -3,7 +3,7 @@ About Test Data
 
 To check the correctness of the strategies' implementation, we have prepared a torrent list and some environment parameters. They're stored in `data.json`, `environment.json` and `clientstatus.json`, respectively.
 
-The tester will set some of interfaces return specific values and feed the torrent list into autoremove-torrents. And then, the tester will check whether the autoremove-torrents removes the expected torrents.
+The tester will set some of interfaces return specific values and feed the torrent list into removarr. And then, the tester will check whether the removarr removes the expected torrents.
 
 Environment
 ------------

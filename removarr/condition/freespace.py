@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from .freespacebase import FreeSpaceConditionBase
-from autoremovetorrents.compatibility.disk_usage_ import disk_usage_
+from removarr.compatibility.disk_usage_ import disk_usage_
 
 class FreeSpaceCondition(FreeSpaceConditionBase):
     def __init__(self, settings):
