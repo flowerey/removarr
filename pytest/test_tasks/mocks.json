@@ -15,12 +15,12 @@
         "json": {
             "categories": [],
             "full_update": true,
-            "rid":16,
+            "rid": 16,
             "server_state": {
                 "connection_status": "connected",
                 "dht_nodes": 849,
                 "dl_info_data": 0,
-                "dl_info_speed": 0, 
+                "dl_info_speed": 0,
                 "dl_rate_limit": 0,
                 "queueing": true,
                 "refresh_interval": 1500,
@@ -33,7 +33,7 @@
         }
     },
     "mock://qbittorrent/query/torrents": {
-        "json" : [
+        "json": [
             {
                 "added_on": 1547136801,
                 "amount_left": 0,

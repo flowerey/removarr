@@ -25,7 +25,7 @@ class Transmission(object):
     def login(self, username, password):
         # Save authentication of session
         self._session.auth = (username, password)
-    
+
     # Make Transmission Request
     def _make_transmission_request(self, method, arguments=None):
         retry = 3
@@ -54,7 +54,7 @@ class Transmission(object):
         raise RemoteFailure('The server responsed %d on method %s.' \
             % (request.status_code, method)
         )
-    
+
     # Get client status
     def client_status(self):
         status = self._make_transmission_request('session-stats')
@@ -68,14 +68,14 @@ class Transmission(object):
         # Uploading speed and uploaded size
         cs.upload_speed = status['uploadSpeed']
         cs.total_uploaded = status['current-stats']['uploadedBytes']
-        
+
         return cs
-    
+
     # Get Transmission Version
     def version(self):
         ver = self._make_transmission_request('session-get')['version']
         return ('Transmission %s' % ver)
-    
+
     # Get API Version
     def api_version(self):
         ver = self._make_transmission_request('session-get')['rpc-version']
@@ -152,7 +152,7 @@ class Transmission(object):
         torrent_obj.progress = torrent['percentDone']
 
         return torrent_obj
-    
+
     # Get free space
     def remote_free_space(self, path):
         return self._make_transmission_request('free-space', {

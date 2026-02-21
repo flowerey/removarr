@@ -94,7 +94,7 @@ class ConditionParser(object):
                      | EQ
         '''
         t[0] = t[1]
-    
+
     def p_relation_expression(self, t):
         '''
         expression : STRING relation_op NUMBER
@@ -115,7 +115,7 @@ class ConditionParser(object):
         else:
             raise ConditionSyntaxError('Syntax Error: Unexpected EOF.')
         self.remain = self._torrent_list
-    
+
     def __init__(self, expression):
         # Initialize lexer and parser
         self.lexer = ConditionLexer()
@@ -124,7 +124,7 @@ class ConditionParser(object):
         self._expression = expression
         # Logger
         self._logger = logger.Logger.register(__name__)
-    
+
     # Apply this strategy
     def apply(self, client_status, torrents):
         self._torrent_list = set(torrents)

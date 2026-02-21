@@ -8,7 +8,7 @@ class Condition(object):
         # Results
         self.remain = set()
         self.remove = set()
-    
+
     def compare(self, a, b, comp):
         return (comp == Comparer.LT and a < b) \
             or (comp == Comparer.GT and a > b) \

@@ -19,10 +19,10 @@ class ConditionLexer(object):
     t_GT = r'>'
     t_LPAREN = r'\('
     t_RPAREN = r'\)'
-    
+
     # Ignored characters
     t_ignore = ' \t'
-    
+
     def t_NUMBER(self, t):
         r'\d+(\.\d+)?'
         t.value = float(t.value)
@@ -33,7 +33,7 @@ class ConditionLexer(object):
         t.value = t.value.lower()
         t.type = self.reserved.get(t.value, 'STRING')
         return t
-    
+
     def t_error(self, t):
         raise IllegalCharacter('Illegal character \'%s\'.' % t.value[0])
 

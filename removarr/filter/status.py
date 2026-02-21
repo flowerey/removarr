@@ -47,5 +47,5 @@ class StatusFilter(Filter):
                 result.remove(torrent)
             if torrent in result and self._rej_stalldown and torrent.status == TorrentStatus.Downloading and torrent.stalled:
                 result.remove(torrent)
-        
+
         return result

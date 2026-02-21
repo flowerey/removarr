@@ -34,7 +34,7 @@ class uTorrent(object):
             request = self._session.get(self._host+'/gui/token.html')
         except Exception as exc:
             raise ConnectionFailure(str(exc))
-        
+
         pattern = re.compile('<[^>]+>')
         text = request.text
         if request.status_code == 200:
@@ -44,40 +44,40 @@ class uTorrent(object):
         else:
             raise RemoteFailure('The server responsed %d.' \
                 % request.status_code)
-    
+
     # Get client status
     def client_status(self):
         # In uTorrent we can only get the total download/upload speed,
         # and we should get it by summing the torrents list manually.
-        
+
         # Get torrent list
         if time.time() - self._refresh_time > self._refresh_cycle:
             self.torrents_list()
-        
+
         # Get sum
         download_speed = 0
         upload_speed = 0
         for torrent in self._torrents_list_cache['torrents']:
             upload_speed += torrent[8]
             download_speed += torrent[8]
-        
+
         # Generate client status
         cs = ClientStatus()
         cs.download_speed = download_speed
         cs.upload_speed = upload_speed
 
         return cs
-    
+
     # Get uTorrent Version
     def version(self):
         if self._version == '': # Call torrents_list() to get the version
             self.torrents_list()
         return ('uTorrent (bulid %s)' % str(self._version))
-    
+
     # Get API Version
     def api_version(self):
         return 'Unknown' # There is no interfaces to check the API version
-    
+
     # Get Torrents List
     def torrents_list(self):
         # Request torrents list
@@ -102,7 +102,7 @@ class uTorrent(object):
             params={'action':'getprops', 'token':self._token, 'hash':torrent_hash})
         request.encoding = 'utf-8'
         return request.json()['props'][0]
-    
+
     # Get Torrent Properties
     def torrent_properties(self, torrent_hash):
         if time.time() - self._refresh_time > self._refresh_cycle: # Refresh

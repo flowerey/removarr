@@ -16,7 +16,7 @@ def test_main(requests_mock):
     requests_mock.get('mock://qbittorrent/version/api', text='10')
     requests_mock.post('mock://qbittorrent/login', text='Fails.')
     requests_mock.post('mock://transmission/transmission/rpc', status_code=401)
-    
+
     # Open file of command lines
     with open(os.path.join(basic_dir, 'command_lines.txt')) as f:
         lines = f.readlines()

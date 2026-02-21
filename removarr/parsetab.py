@@ -7,7 +7,7 @@ _tabversion = '3.10'
 _lr_method = 'LALR'
 
 _lr_signature = 'leftANDORAND EQ GT LPAREN LT NUMBER OR RPAREN STRINGstatement : expressionexpression : LPAREN expression RPAREN\n        expression : expression AND expression\n                    | expression OR expression\n        \n        relation_op : LT\n                     | GT\n                     | EQ\n        \n        expression : STRING relation_op NUMBER\n                    | STRING relation_op STRING\n        '
-    
+
 _lr_action_items = {'LPAREN':([0,3,5,6,],[3,3,3,3,]),'STRING':([0,3,5,6,8,9,10,11,],[4,4,4,4,15,-5,-6,-7,]),'$end':([1,2,12,13,14,15,16,],[0,-1,-3,-4,-2,-9,-8,]),'AND':([2,7,12,13,14,15,16,],[5,5,-3,-4,-2,-9,-8,]),'OR':([2,7,12,13,14,15,16,],[6,6,-3,-4,-2,-9,-8,]),'LT':([4,],[9,]),'GT':([4,],[10,]),'EQ':([4,],[11,]),'RPAREN':([7,12,13,14,15,16,],[14,-3,-4,-2,-9,-8,]),'NUMBER':([8,9,10,11,],[16,-5,-6,-7,]),}
 
 _lr_action = {}

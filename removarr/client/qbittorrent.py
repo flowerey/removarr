@@ -17,7 +17,7 @@ class qBittorrent(object):
             self._host = host
             # Requests Session
             self._session = requests.Session()
-        
+
         # Check API Compatibility
         def check_compatibility(self):
             request = self._session.get(self._host+'/version/api')
@@ -26,7 +26,7 @@ class qBittorrent(object):
         # Get API major version
         def api_major_version(self):
             return 'v1'
-        
+
         # Get API version
         def api_version(self):
             return self._session.get(self._host+'/version/api')
@@ -34,7 +34,7 @@ class qBittorrent(object):
         # Get client version
         def client_version(self):
             return self._session.get(self._host+'/version/qbittorrent')
-        
+
         # Login
         def login(self, username, password):
             return self._session.post(self._host+'/login', data={'username':username, 'password':password})
@@ -46,19 +46,19 @@ class qBittorrent(object):
         # Get torrent list
         def torrent_list(self):
             return self._session.get(self._host+'/query/torrents')
-        
+
         # Get torrent's generic properties
         def torrent_generic_properties(self, torrent_hash):
             return self._session.get(self._host+'/query/propertiesGeneral/'+torrent_hash)
-        
+
         # Get torrent's tracker
         def torrent_trackers(self, torrent_hash):
             return self._session.get(self._host+'/query/propertiesTrackers/'+torrent_hash)
-        
+
         # Batch Delete torrents
         def delete_torrents(self, torrent_hash_list):
             return self._session.post(self._host+'/command/delete', data={'hashes':'|'.join(torrent_hash_list)})
-        
+
         # Batch Delete torrents and data
         def delete_torrents_and_data(self, torrent_hash_list):
             return self._session.post(self._host+'/command/deletePerm', data={'hashes':'|'.join(torrent_hash_list)})
@@ -70,7 +70,7 @@ class qBittorrent(object):
             self._host = host
             # Requests Session
             self._session = requests.Session()
-        
+
         # Check API Compatibility
         def check_compatibility(self):
             request = self._session.get(self._host+'/api/v2/app/webapiVersion')
@@ -79,7 +79,7 @@ class qBittorrent(object):
         # Get API major version
         def api_major_version(self):
             return 'v2'
-        
+
         # Get API version
         def api_version(self):
             return self._session.get(self._host+'/api/v2/app/webapiVersion')
@@ -87,7 +87,7 @@ class qBittorrent(object):
         # Get client version
         def client_version(self):
             return self._session.get(self._host+'/api/v2/app/version')
-        
+
         # Login
         def login(self, username, password):
             return self._session.post(self._host+'/api/v2/auth/login', data={'username':username, 'password':password})
@@ -99,19 +99,19 @@ class qBittorrent(object):
         # Get torrent list
         def torrent_list(self):
             return self._session.get(self._host+'/api/v2/torrents/info')
-        
+
         # Get torrent's generic properties
         def torrent_generic_properties(self, torrent_hash):
             return self._session.get(self._host+'/api/v2/torrents/properties', params={'hash': torrent_hash})
-        
+
         # Get torrent's tracker
         def torrent_trackers(self, torrent_hash):
             return self._session.get(self._host+'/api/v2/torrents/trackers', params={'hash':torrent_hash})
-        
+
         # Batch Delete torrents
         def delete_torrents(self, torrent_hash_list):
             return self._session.post(self._host+'/api/v2/torrents/delete', data={'hashes':'|'.join(torrent_hash_list), 'deleteFiles': False})
-        
+
         # Batch Delete torrents and data
         def delete_torrents_and_data(self, torrent_hash_list):
             return self._session.post(self._host+'/api/v2/torrents/delete', data={'hashes':'|'.join(torrent_hash_list), 'deleteFiles': True})
@@ -141,13 +141,13 @@ class qBittorrent(object):
             request = self._request_handler.login(username, password)
         except Exception as exc:
             raise ConnectionFailure(str(exc))
-        
+
         if request.status_code == 200:
             if request.text == 'Fails.': # Fail
                 raise LoginFailure(request.text)
         else:
             raise LoginFailure('The server returned HTTP %d.' % request.status_code)
-    
+
     # Get client status
     def client_status(self):
         status = self._request_handler.server_state().json()['server_state']
@@ -161,18 +161,18 @@ class qBittorrent(object):
         # Uploading speed and uploaded size
         cs.upload_speed = status['up_info_speed']
         cs.total_uploaded = status['up_info_data']
-        
+
         return cs
 
     # Get qBittorrent Version
     def version(self):
         request = self._request_handler.client_version()
         return ('qBittorrent %s' % request.text)
-    
+
     # Get API version
     def api_version(self):
         return ('%s (%s)' % (self._request_handler.api_version().text, self._request_handler.api_major_version()))
-    
+
     # Get Torrents List
     def torrents_list(self):
         # Request torrents list
@@ -186,7 +186,7 @@ class qBittorrent(object):
         for torrent in result:
             torrent_hash.append(torrent['hash'])
         return torrent_hash
-    
+
     # Get Torrent Properties
     def torrent_properties(self, torrent_hash):
         if time.time() - self._refresh_time > self._refresh_cycle: # Out of date
@@ -262,7 +262,7 @@ class qBittorrent(object):
         else:
             status = TorrentStatus.Unknown
         return status
-    
+
     # Batch Remove Torrents
     # Return values: (success_hash_list, failed_list -> {hash: reason, ...})
     def remove_torrents(self, torrent_hash_list, remove_data):

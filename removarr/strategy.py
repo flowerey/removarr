@@ -149,7 +149,7 @@ class Strategy(object):
                         "%s. Your client may not support this property, so the condition %s does not work." % \
                         (str(e), conf)
                     )
-                
+
                 # Output
                 self.remain_list = cond.remain
                 self.remove_list.update(cond.remove)

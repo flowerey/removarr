@@ -26,7 +26,7 @@ class Logger(object):
 
         # Initialize the file handler
         Logger.file_handler = logging.FileHandler(os.path.join(
-            Logger.log_path, 
+            Logger.log_path,
             Logger.LOG_FILE_NAME % datetime.now().strftime('%Y-%m-%d')
         ))
         Logger.file_handler.setLevel(logging.DEBUG if file_debug_log else logging.INFO)
